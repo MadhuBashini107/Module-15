@@ -21,13 +21,57 @@ To write a Python program to build and evaluate the given Expression tree.
 
 ## PROGRAM:
 
-```
-WRITE YOUR CODE
+```python
+class Node:
+    def __init__(self, val, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def isLeaf(node):
+    return node.left is None and node.right is None
+ 
+def process(op, x, y):
+    if op == '+':
+        return x + y
+    if op == '-':
+        return x - y
+    if op == '*':
+        return x * y
+    if op == '/':
+        return x / y
+ 
+def evaluate(root):
+    if root is None:
+        return 0
+  
+    if isLeaf(root):
+        return float(root.val)
+    
+    x = evaluate(root.left)
+    y = evaluate(root.right)
+    return (process(root.val, x, y))
+    
+root= Node("/")
+root.left= Node("*")
+root.right= Node("+")
+root.left.left=Node("+")
+root.left.right=Node(4)
+root.right.left=Node("-")
+root.right.right=Node(2)
+root.left.left.left=Node(3)
+root.left.left.right=Node(1)
+root.right.left.left=Node(9)
+root.right.left.right=Node(5)
+ 
+print("The value of the expression tree is",evaluate(root))
 ```
 
 ## OUTPUT:
-```
-```
+
+<img width="1043" height="175" alt="image" src="https://github.com/user-attachments/assets/b6a0a79f-50d7-45b7-8ad1-2568daf329d8" />
+
 
 ## RESULT:
 
+Thus the Python program to build and evaluate the given Expression tree has been implemented and executed successfully.
